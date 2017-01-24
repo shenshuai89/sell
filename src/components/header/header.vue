@@ -128,6 +128,7 @@
           background: rgba(7, 17, 27, 0)
         }
       }
+
     .content-wrapper
       position: relative
       padding: 24px 12px 18px 24px

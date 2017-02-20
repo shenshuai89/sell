@@ -17,7 +17,7 @@ npm run build
 ## produce dist package,use the prod.server.js can run the project
 ``` bash
 node prod.server.js
-//localhost:8888
+// >> localhost:8888
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

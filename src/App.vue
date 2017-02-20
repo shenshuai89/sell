@@ -12,27 +12,36 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view :seller="seller"></router-view>
+    <keep-alive>
+      <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+  import {urlParse} from './common/js/util';
   import header from './components/header/header.vue';
   const ERR_OK = 0;
   export default{
     name: 'app',
     data() {
       return {
-        seller: {}
+        seller: {
+          id: (() => {
+            let queryParam = urlParse();
+            return queryParam.id;
+          })()
+        }
       };
     },
     created() {
-        this.$http.get('/api/seller').then((response) => {
-          response = response.body;
-          if (response.errno === ERR_OK) {
-              this.seller = response.data;
-          }
-        });
+      this.$http.get('/api/seller?id=' + this.seller.id).then((response) => {
+        response = response.body;
+        if (response.errno === ERR_OK) {
+          this.seller = Object.assign({}, this.seller, response.data);
+        }
+      })
+      ;
     },
     components: {
       vHeader: header
@@ -47,17 +56,17 @@
     width: 100%
     height: 40px
     line-height: 40px
-    //border-bottom: 1px solid rgba(7,17,27,0.1);
-    border-b-1px(rgba(7, 17, 27 ,0.1))
+  //border-bottom: 1px solid rgba(7,17,27,0.1);
+    border-b-1px(rgba(7, 17, 27, 0.1))
     .tab-item
       flex: 1
       text-align: center
       & > a
         display: block
         font-size: 14px
-        color: rgb(77,85,93)
+        color: rgb(77, 85, 93)
         &.active
-          color: rgb(220,30,30)
+          color: rgb(220, 30, 30)
 
 
 </style>

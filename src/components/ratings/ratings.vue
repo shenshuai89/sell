@@ -64,9 +64,9 @@
   import star from '../star/star.vue';
   import split from '../split/split.vue';
   import ratingselect from '../ratingselect/ratingselect.vue';
+  import axios from 'axios';
 
   const ALL = 2;
-  const ERR_OK = 0;
   export default{
     props: {
       seller: {
@@ -86,16 +86,14 @@
       };
     },
     created() {
-      this.$http.get('/api/ratings').then((response) => {
-        response = response.body;
-        if (response.errno === ERR_OK) {
-          this.ratings = response.data;
-          this.$nextTick(() => {
-            this.scroll = new BScroll(this.$refs.ratings, {
-              click: true
-            });
+      axios.get('../../static/data.json').then((response) => {
+        this.ratings = response.data.ratings;
+        this.seller = response.data.seller;
+        this.$nextTick(() => {
+          this.scroll = new BScroll(this.$refs.ratings, {
+            click: true
           });
-        }
+        });
       });
     },
     methods: {

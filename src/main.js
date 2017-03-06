@@ -18,8 +18,7 @@ const router = new VueRouter({
     base: __dirname,
     linkActiveClass: 'active',
     routes: [
-        {path: '/', redirect: '/goods'},
-        {path: '/goods', name: 'goods', component: goods, alias: ['/']},
+        {path: '/goods', name: 'goods', component: goods},
         {path: '/ratings', name: 'ratings', component: ratings},
         {path: '/seller', name: 'second', component: seller}
     ]
@@ -27,6 +26,9 @@ const router = new VueRouter({
 
 /* eslint-disable no-new */
 new Vue({
+    el: '#app',
     router,
     render: x => x(App)
-}).$mount('#app');
+});
+
+router.push('/goods');
